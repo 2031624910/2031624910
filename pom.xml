@@ -11,6 +11,7 @@
     <groupId>com.extra.light</groupId>
     <artifactId>light</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
     <modules>
         <module>record</module>
     </modules>
@@ -22,12 +23,24 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.github.xiaoymin</groupId>-->
-<!--            &lt;!&ndash;使用Swagger2&ndash;&gt;-->
-<!--            <artifactId>knife4j-spring-boot-starter</artifactId>-->
-<!--            <version>2.0.9</version>-->
-<!--        </dependency>-->
+        <!--api文档-->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <!--使用Swagger2-->
+            <artifactId>knife4j-spring-boot-starter</artifactId>
+            <version>2.0.9</version>
+        </dependency>
+        <!--配置文件信息读取用, 以下为官方文档，意思是可以通过@ConfigurationProperties配置，这是在编译项目的时候调用的-->
+        <!--You can easily generate your own configuration metadata file from items annotated with @ConfigurationProperties
+         by using the spring-boot-configuration-processor jar. The jar includes a Java annotation processor which is invoked
+          as your project is compiled. To use the processor, include a dependency on spring-boot-configuration-processor.-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+
     </dependencies>
 
 </project>

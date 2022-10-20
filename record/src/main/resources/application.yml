@@ -1,2 +1,4 @@
 server:
   port: 9081
+aa:
+  bb: 1
