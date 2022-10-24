@@ -1,5 +1,7 @@
 package com.extra.light.record.controller;
 
+import com.extra.light.record.annotation.ReaderSql;
+import com.extra.light.record.annotation.WriterSql;
 import com.extra.light.record.dao.mapper.TestMapper;
 import com.extra.light.record.db.DynamicDataSource;
 import com.extra.light.record.enums.DateBaseType;
@@ -26,15 +28,15 @@ public class TestController {
 
     @ApiOperation("数据库1请求")
     @GetMapping("testGetSql1")
+    @ReaderSql
     public String testGetSql1(){
-        DynamicDataSource.setDateBaseType(DateBaseType.READER.name());
         return testMapper.getUserId();
     }
 
     @ApiOperation("数据库2请求")
     @GetMapping("testGetSql2")
+    @WriterSql
     public String testGetSql2(){
-        DynamicDataSource.setDateBaseType(DateBaseType.WRITER.name());
         return testMapper.getUserId();
     }
 }
