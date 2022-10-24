@@ -12,5 +12,5 @@ public enum DateBaseType {
     /**
      * sqlServer数据库
      */
-    SQL_SERVER;
+    SQL_SERVER_ONE;
 }

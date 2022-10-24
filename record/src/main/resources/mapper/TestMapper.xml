@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.extra.light.record.dao.mapper.TestMapper">
+
+
+    <select id="getUserId" resultType="java.lang.String">
+        SELECT
+        TOP 1
+        user_id
+        FROM
+        pls_user
+    </select>
+</mapper>

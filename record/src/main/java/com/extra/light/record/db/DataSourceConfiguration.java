@@ -40,14 +40,12 @@ public class DataSourceConfiguration {
         return druidProperty.druidDataSource(dataSource);
     }
 
-
     @Bean
     @Primary
     public DynamicDataSource master(DataSource h2DataSource, DataSource s1DataSource){
-        DruidDataSource dataSource = DruidDataSourceBuilder.create().build();
         Map<Object,Object> targetDataSource = new HashMap<>(2);
-        targetDataSource.put(DateBaseType.H2.name(),dataSource);
-        targetDataSource.put(DateBaseType.SQL_SERVER.name(),dataSource);
+        targetDataSource.put(DateBaseType.H2.name(),h2DataSource);
+        targetDataSource.put(DateBaseType.SQL_SERVER_ONE.name(),s1DataSource);
         return new DynamicDataSource(s1DataSource,targetDataSource);
     }
 

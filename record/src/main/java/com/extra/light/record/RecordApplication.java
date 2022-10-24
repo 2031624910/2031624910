@@ -1,5 +1,6 @@
 package com.extra.light.record;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -11,6 +12,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
  * @author 林树毅
  */
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+@MapperScan("com.extra.light.record.dao.mapper")
 public class RecordApplication {
     public static void main(String[] args) {
         SpringApplication.run(RecordApplication.class, args);

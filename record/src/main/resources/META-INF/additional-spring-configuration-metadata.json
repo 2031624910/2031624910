@@ -1,3 +1,63 @@
 {
   "properties": [
+    {
+      "name": "spring.datasource.druid.h2.password",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.druid.h2.password."
+    },
+    {
+      "name": "spring.datasource.druid.h2.username",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.druid.h2.username."
+    },
+    {
+      "name": "spring.datasource.druid.h2.url",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.druid.h2.url."
+    },
+    {
+      "name": "spring.datasource.druid.h2.name",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.druid.h2.name."
+    },
+    {
+      "name": "spring.datasource.druid.h2.type",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.druid.h2.type."
+    },
+    {
+      "name": "spring.datasource.druid.h2.driver-class-name",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.druid.h2.driver-class-name."
+    },
+    {
+      "name": "spring.datasource.druid.s1.url",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.druid.s1.url."
+    },
+    {
+      "name": "spring.datasource.druid.s1.username",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.druid.s1.username."
+    },
+    {
+      "name": "spring.datasource.druid.s1.password",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.druid.s1.password."
+    },
+    {
+      "name": "spring.datasource.druid.s1.name",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.druid.s1.name."
+    },
+    {
+      "name": "spring.datasource.druid.s1.type",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.druid.s1.type."
+    },
+    {
+      "name": "spring.datasource.druid.s1.driver-class-name",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.druid.s1.driver-class-name."
+    }
   ] }
