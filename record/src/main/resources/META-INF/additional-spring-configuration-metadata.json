@@ -1,9 +1,3 @@
 {
   "properties": [
-
-    {
-      "name": "aa.bb",
-      "type": "java.lang.String",
-      "description": "Description for aa.bb."
-    }
   ] }
