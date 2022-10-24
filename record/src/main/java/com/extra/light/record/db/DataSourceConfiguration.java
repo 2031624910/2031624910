@@ -34,18 +34,26 @@ public class DataSourceConfiguration {
     }
 
     @Bean
-    @ConfigurationProperties(prefix = "spring.datasource.druid.s1")
+    @ConfigurationProperties(prefix = "spring.datasource.druid.reader")
     public DataSource s1DataSource(DruidProperty druidProperty){
         DruidDataSource dataSource = DruidDataSourceBuilder.create().build();
         return druidProperty.druidDataSource(dataSource);
     }
 
     @Bean
+    @ConfigurationProperties(prefix = "spring.datasource.druid.writer")
+    public DataSource s2DataSource(DruidProperty druidProperty){
+        DruidDataSource dataSource = DruidDataSourceBuilder.create().build();
+        return druidProperty.druidDataSource(dataSource);
+    }
+
+    @Bean
     @Primary
-    public DynamicDataSource master(DataSource h2DataSource, DataSource s1DataSource){
-        Map<Object,Object> targetDataSource = new HashMap<>(2);
+    public DynamicDataSource master(DataSource h2DataSource, DataSource s1DataSource,DataSource s2DataSource){
+        Map<Object,Object> targetDataSource = new HashMap<>(3);
         targetDataSource.put(DateBaseType.H2.name(),h2DataSource);
-        targetDataSource.put(DateBaseType.SQL_SERVER_ONE.name(),s1DataSource);
+        targetDataSource.put(DateBaseType.READER.name(),s1DataSource);
+        targetDataSource.put(DateBaseType.WRITER.name(),s2DataSource);
         return new DynamicDataSource(s1DataSource,targetDataSource);
     }
 

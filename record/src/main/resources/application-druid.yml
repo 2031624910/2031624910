@@ -8,10 +8,17 @@ spring:
         name: una_db
         type: com.alibaba.druid.pool.DruidDataSource
         driver-class-name: org.h2.Driver
-      s1:
+      reader:
         url: jdbc:sqlserver://192.168.3.192:1433;DatabaseName=campus_local
         username: campus
         password: Campus01_Hwd123456!
         name: una_db2
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+      writer:
+        url: jdbc:sqlserver://192.168.3.192:1433;DatabaseName=campus_test
+        username: campus
+        password: Campus01_Hwd123456!
+        name: una_db3
         type: com.alibaba.druid.pool.DruidDataSource
         driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver

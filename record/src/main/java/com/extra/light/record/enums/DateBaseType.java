@@ -10,7 +10,11 @@ public enum DateBaseType {
      */
     H2,
     /**
-     * sqlServer数据库
+     * sqlServer数据库 读
      */
-    SQL_SERVER_ONE;
+    READER,
+    /**
+     * sqlServer数据库 写
+     */
+    WRITER;
 }

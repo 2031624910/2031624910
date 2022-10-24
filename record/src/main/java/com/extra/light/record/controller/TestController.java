@@ -27,14 +27,14 @@ public class TestController {
     @ApiOperation("数据库1请求")
     @GetMapping("testGetSql1")
     public String testGetSql1(){
-        DynamicDataSource.setDateBaseType(DateBaseType.H2.name());
+        DynamicDataSource.setDateBaseType(DateBaseType.READER.name());
         return testMapper.getUserId();
     }
 
     @ApiOperation("数据库2请求")
     @GetMapping("testGetSql2")
     public String testGetSql2(){
-        DynamicDataSource.setDateBaseType(DateBaseType.SQL_SERVER_ONE.name());
+        DynamicDataSource.setDateBaseType(DateBaseType.WRITER.name());
         return testMapper.getUserId();
     }
 }

@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public class DynamicDataSource extends AbstractRoutingDataSource {
 
-    private static String dateBaseType = DateBaseType.SQL_SERVER_ONE.name();
+    private static String dateBaseType = DateBaseType.READER.name();
 
     public DynamicDataSource(DataSource defaultTargetDataSource, Map<Object,Object> targetDataSource){
         super.setDefaultTargetDataSource(defaultTargetDataSource);
@@ -24,7 +24,7 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
     protected Object determineCurrentLookupKey() {
         Object dateBase = getDateBase();
         if (dateBase == null){
-            return DateBaseType.SQL_SERVER_ONE.name();
+            return DateBaseType.READER.name();
         }
         return dateBase;
     }
