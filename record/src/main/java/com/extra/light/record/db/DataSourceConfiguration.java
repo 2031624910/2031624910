@@ -21,17 +21,6 @@ import java.util.Map;
  */
 @Configuration
 public class DataSourceConfiguration {
-    /**
-     * 默认的H2内存数据库，在没有安装系统之前使用该数据库
-     * @param druidProperty     druid配置属性
-     * @return                  DruidDataSource
-     */
-    @Bean
-    @ConfigurationProperties(prefix = "spring.datasource.druid.h2")
-    public DataSource h2DataSource(DruidProperty druidProperty){
-        DruidDataSource dataSource = DruidDataSourceBuilder.create().build();
-        return druidProperty.druidDataSource(dataSource);
-    }
 
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource.druid.reader")
@@ -49,9 +38,8 @@ public class DataSourceConfiguration {
 
     @Bean
     @Primary
-    public DynamicDataSource master(DataSource h2DataSource, DataSource s1DataSource,DataSource s2DataSource){
-        Map<Object,Object> targetDataSource = new HashMap<>(3);
-        targetDataSource.put(DateBaseType.H2.name(),h2DataSource);
+    public DynamicDataSource master(DataSource s1DataSource,DataSource s2DataSource){
+        Map<Object,Object> targetDataSource = new HashMap<>(2);
         targetDataSource.put(DateBaseType.READER.name(),s1DataSource);
         targetDataSource.put(DateBaseType.WRITER.name(),s2DataSource);
         return new DynamicDataSource(s1DataSource,targetDataSource);

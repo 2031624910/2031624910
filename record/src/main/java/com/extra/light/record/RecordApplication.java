@@ -14,7 +14,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  */
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @MapperScan("com.extra.light.record.dao.mapper")
-//@EnableAspectJAutoProxy
+@EnableAspectJAutoProxy
 public class RecordApplication {
     public static void main(String[] args) {
         SpringApplication.run(RecordApplication.class, args);

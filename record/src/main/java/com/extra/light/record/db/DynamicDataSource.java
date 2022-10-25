@@ -1,7 +1,6 @@
 package com.extra.light.record.db;
 
 import com.extra.light.record.enums.DateBaseType;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 import javax.sql.DataSource;

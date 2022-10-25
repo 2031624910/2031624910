@@ -3,8 +3,6 @@ package com.extra.light.record.controller;
 import com.extra.light.record.annotation.ReaderSql;
 import com.extra.light.record.annotation.WriterSql;
 import com.extra.light.record.dao.mapper.TestMapper;
-import com.extra.light.record.db.DynamicDataSource;
-import com.extra.light.record.enums.DateBaseType;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,15 +26,13 @@ public class TestController {
 
     @ApiOperation("数据库1请求")
     @GetMapping("testGetSql1")
-    @ReaderSql
     public String testGetSql1(){
         return testMapper.getUserId();
     }
 
     @ApiOperation("数据库2请求")
     @GetMapping("testGetSql2")
-    @WriterSql
     public String testGetSql2(){
-        return testMapper.getUserId();
+        return testMapper.getWriterUserId();
     }
 }

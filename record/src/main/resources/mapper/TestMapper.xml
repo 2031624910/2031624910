@@ -12,4 +12,11 @@
         FROM
         pls_user
     </select>
+    <select id="getWriterUserId" resultType="java.lang.String">
+        SELECT
+        TOP 1
+        user_id
+        FROM
+        pls_user
+    </select>
 </mapper>

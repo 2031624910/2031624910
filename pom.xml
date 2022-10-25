@@ -40,11 +40,6 @@
             <optional>true</optional>
         </dependency>
         <!--数据库依赖-->
-        <!--h2数据库-->
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-        </dependency>
         <!--jdbc-->
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
