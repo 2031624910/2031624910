@@ -58,7 +58,8 @@ spring:
         wall:
           config:
             multi-statement-allow:  true
-#logging:
-#  config: classpath:logback-spring.xml
-#  file:
-#    path: appdate/logs/
+# 日志打印
+logging:
+  config: classpath:logback-spring.xml
+  file:
+    path: appdate/logs/
