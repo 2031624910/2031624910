@@ -1,6 +1,5 @@
 package com.extra.light.record.util;
 
-import com.extra.light.record.annotation.ExcelMethod;
 import com.extra.light.record.model.AnnotationModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,24 +33,29 @@ public class AnnotationUtil {
      *
      * @param classPath          包名
      * @param tagAnnotationClass 指定注解类型
-     * @param <T>
-     * @return
-     * @throws Exception
+     * @param <T>                注解实例
+     * @return 内容
+     * @throws Exception 没啥东西
      */
-    public <T extends Annotation> List<AnnotationModel> getAllAddTagAnnotationUrl(String classPath, Class<T> tagAnnotationClass) throws Exception {
-        List<AnnotationModel> resList = new ArrayList<>();
-        ResourcePatternResolver resolver = ResourcePatternUtils.getResourcePatternResolver(resourceLoader);
-        MetadataReaderFactory metaReader = new CachingMetadataReaderFactory(resourceLoader);
-        Resource[] resources = resolver.getResources(classPath);
-        for (org.springframework.core.io.Resource r : resources) {
-            try {
-                MetadataReader reader = metaReader.getMetadataReader(r);
-                resList = resolveClass(reader, resList, tagAnnotationClass);
-            } catch (Exception e) {
-                log.error("根据注解查询所有方法错误 >> " + e.getMessage());
+    public <T extends Annotation> List<AnnotationModel> getAllAddTagAnnotationUrl(String classPath, Class<T> tagAnnotationClass) {
+        try {
+            List<AnnotationModel> resList = new ArrayList<>();
+            ResourcePatternResolver resolver = ResourcePatternUtils.getResourcePatternResolver(resourceLoader);
+            MetadataReaderFactory metaReader = new CachingMetadataReaderFactory(resourceLoader);
+            Resource[] resources = resolver.getResources(classPath);
+            for (org.springframework.core.io.Resource r : resources) {
+                try {
+                    MetadataReader reader = metaReader.getMetadataReader(r);
+                    resList = resolveClass(reader, resList, tagAnnotationClass);
+                } catch (Exception e) {
+                    log.error("根据注解查询所有方法错误 >> " + e.getMessage());
+                }
             }
+            return resList;
+        } catch (Exception e) {
+            log.error("根据注解查询所有方法异常 >> " + e.getMessage());
+            return new ArrayList<>();
         }
-        return resList;
     }
 
     /**
