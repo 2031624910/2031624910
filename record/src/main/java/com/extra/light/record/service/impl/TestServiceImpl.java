@@ -1,25 +1,22 @@
 package com.extra.light.record.service.impl;
 
+import com.extra.light.record.model.TestExcelModel;
 import com.extra.light.record.service.TestService;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.List;
+
+/**
+ * @author 林树毅
+ */
 @Service
 public class TestServiceImpl implements TestService {
-    @Override
-    public String annotationTest(String a) {
-        System.out.println("我特么来了");
-        return null;
-    }
 
     @Override
-    public String annotationTest1(String b, Object d) {
-        System.out.println("我走拉");
-        return null;
-    }
-
-    @Override
-    public String annotationTest2(String c, String d) {
-        System.out.println("我又来了");
-        return null;
+    public List<TestExcelModel> resultList(int page, int size, String params, HttpServletRequest request) {
+        return Collections.singletonList(TestExcelModel.builder().money(BigDecimal.ONE).time(7).wait("等待").build());
     }
 }

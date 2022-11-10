@@ -1,36 +1,24 @@
 package com.extra.light.record.service;
 
 import com.extra.light.record.annotation.ExcelMethod;
-import org.springframework.stereotype.Service;
+import com.extra.light.record.model.TestExcelModel;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @author 林树毅
  */
 public interface TestService {
     /**
-     * 测试注解类
+     * 用于接口导出测试
      *
-     * @param a
+     * @param page
+     * @param size
+     * @param params
+     * @param request
      * @return
      */
-    @ExcelMethod(value = "annotationTest", clazz = String.class)
-    String annotationTest(String a);
-
-    /**
-     * 测试注解类1
-     *
-     * @param b
-     * @param d
-     * @return
-     */
-    @ExcelMethod(value = "annotationTest", clazz = String.class)
-    String annotationTest1(String b, Object d);
-
-    /**
-     * 测试注解类2
-     * @param c
-     * @param d
-     * @return
-     */
-    String annotationTest2(String c, String d);
+    @ExcelMethod(clazz = TestExcelModel.class)
+    List<TestExcelModel> resultList(int page, int size, String params, HttpServletRequest request);
 }

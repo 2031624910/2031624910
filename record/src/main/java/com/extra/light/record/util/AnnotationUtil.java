@@ -37,9 +37,9 @@ public class AnnotationUtil {
      * @return 内容
      * @throws Exception 没啥东西
      */
-    public <T extends Annotation> List<AnnotationModel> getAllAddTagAnnotationUrl(String classPath, Class<T> tagAnnotationClass) {
+    public <T extends Annotation> List<AnnotationModel<T>> getAllAddTagAnnotationUrl(String classPath, Class<T> tagAnnotationClass) {
         try {
-            List<AnnotationModel> resList = new ArrayList<>();
+            List<AnnotationModel<T>> resList = new ArrayList<>();
             ResourcePatternResolver resolver = ResourcePatternUtils.getResourcePatternResolver(resourceLoader);
             MetadataReaderFactory metaReader = new CachingMetadataReaderFactory(resourceLoader);
             Resource[] resources = resolver.getResources(classPath);
@@ -68,8 +68,8 @@ public class AnnotationUtil {
      * @return
      * @throws Exception
      */
-    private <T extends Annotation> List<AnnotationModel> resolveClass(
-            MetadataReader reader, List<AnnotationModel> resList, Class<T> tagAnnotationClass)
+    private <T extends Annotation> List<AnnotationModel<T>> resolveClass(
+            MetadataReader reader, List<AnnotationModel<T>> resList, Class<T> tagAnnotationClass)
             throws Exception {
         String tagAnnotationClassCanonicalName = tagAnnotationClass.getCanonicalName();
         //获取注解元数据
@@ -92,9 +92,9 @@ public class AnnotationUtil {
                     String name = method.getName();
                     if (methodName.equals(name)) {
                         //确认这个为有用的类
-                        Annotation annotation = method.getAnnotation(tagAnnotationClass);
+                        T annotation = method.getAnnotation(tagAnnotationClass);
                         if (StringUtil.isNotEmpty(annotation)) {
-                            AnnotationModel model = new AnnotationModel();
+                            AnnotationModel<T> model = new AnnotationModel<>();
                             model.setAnnotation(annotation);
                             model.setClazz(aClass);
                             model.setMethod(method);

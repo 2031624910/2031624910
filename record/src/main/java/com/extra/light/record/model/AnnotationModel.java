@@ -9,8 +9,8 @@ import java.lang.reflect.Method;
  * @author 林树毅
  */
 @Data
-public class AnnotationModel {
+public class AnnotationModel<T extends Annotation> {
     private Class<?> clazz;
     private Method method;
-    private Annotation annotation;
+    private T annotation;
 }
