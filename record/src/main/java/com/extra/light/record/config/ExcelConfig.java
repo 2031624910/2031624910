@@ -35,7 +35,6 @@ public class ExcelConfig {
                 Method method = model.getMethod();
                 ExcelMethod annotation = model.getAnnotation();
                 String methodName = method.getName();
-                String excelTarget = annotation.value();
                 ExcelMethodInvokeModel invokeModel = new ExcelMethodInvokeModel();
                 //填入对应的值
                 invokeModel.setClassType(clazz);

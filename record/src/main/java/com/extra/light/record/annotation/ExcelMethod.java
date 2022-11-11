@@ -56,7 +56,7 @@ public @interface ExcelMethod {
      *
      * @return
      */
-    Class[] args() default {Integer.class, Integer.class, String.class, HttpServletRequest.class};
+    Class[] args() default {int.class, int.class, String.class, HttpServletRequest.class};
 
     /**
      * page 的位置

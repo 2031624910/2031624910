@@ -21,8 +21,16 @@ public class ResultConfig {
         return custom(200, msg, date, HttpStatus.OK);
     }
 
+    public static ResponseEntity<?> success(String msg) {
+        return success(msg, null);
+    }
+
     public static ResponseEntity<?> failure(String msg, Object date) {
         return custom(500, msg, date, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    public static ResponseEntity<?> failure(String msg) {
+        return failure(msg, null);
     }
 
     @Data
