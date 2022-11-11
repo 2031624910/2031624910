@@ -20,26 +20,18 @@ public @interface ExcelMethod {
     String value() default "none";
 
     /**
-     * 优先值，
-     * 0 默认优先级
-     *
-     * @return
-     */
-    int def() default 0;
-
-    /**
      * 默认为空，俩者哪个有值，用哪个，都有值用自己,都没有值，则都是none
      *
      * @return
      */
-    String fileName() default "none";
+    String fileName();
 
     /**
      * 默认为fileName,有值则使用值
      *
      * @return
      */
-    String sheetName() default "";
+    String sheetName() default "none";
 
     /**
      * 必填项, 无默认值，必须写入一个，其值是用于到处的数据结构的类型

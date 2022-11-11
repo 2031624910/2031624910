@@ -19,6 +19,6 @@ public interface TestService {
      * @param request
      * @return
      */
-    @ExcelMethod(clazz = TestExcelModel.class)
+    @ExcelMethod(clazz = TestExcelModel.class, fileName = "导出测试")
     List<TestExcelModel> resultList(int page, int size, String params, HttpServletRequest request);
 }

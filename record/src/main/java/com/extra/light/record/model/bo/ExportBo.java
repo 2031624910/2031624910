@@ -8,6 +8,8 @@ import java.util.List;
  */
 @Data
 public class ExportBo {
-    String methodName;
-    List<Object> objects;
+    private String excelTarget;
+    private List<Object> objects;
+    private boolean test;
+    private String suffix;
 }

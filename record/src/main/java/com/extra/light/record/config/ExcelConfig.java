@@ -21,6 +21,9 @@ import java.util.*;
 @Slf4j
 public class ExcelConfig {
 
+    private static final String NONE = "none";
+
+
     @Bean
     public Map<String, ExcelMethodInvokeModel> excelMethodInvokeMap(AnnotationUtil annotationUtil) {
         String classPath = "classpath*:com/extra/light/record/service/*.class";
@@ -34,22 +37,54 @@ public class ExcelConfig {
                 Class<?> clazz = model.getClazz();
                 Method method = model.getMethod();
                 ExcelMethod annotation = model.getAnnotation();
+                String value = annotation.value();
                 String methodName = method.getName();
-                ExcelMethodInvokeModel invokeModel = new ExcelMethodInvokeModel();
+                //获取列表标记
+                String excelTarget = getExcelTarget(methodName, value);
+                //根据列表标记，查询是否是同一个导出列表
+                ExcelMethodInvokeModel invokeModel = null;
+                if (map.containsKey(excelTarget)) {
+                    //如果存在
+                    invokeModel = map.get(excelTarget);
+                } else {
+                    invokeModel = new ExcelMethodInvokeModel();
+                    invokeModel.setFileName(annotation.fileName());
+                    invokeModel.setExcelTarget(excelTarget);
+                }
+                String sheetName = getSheetName(annotation.fileName(), annotation.sheetName());
+                if (sheetName == null) {
+                    continue;
+                }
+                invokeModel.addNote(methodName, sheetName, annotation.page(), annotation.size(), annotation.args(), annotation.clazz(), clazz);
                 //填入对应的值
-                invokeModel.setClassType(clazz);
-                invokeModel.setResultType(annotation.clazz());
-                invokeModel.setArgs(annotation.args());
-                invokeModel.setPage(annotation.page());
-                invokeModel.setSize(annotation.size());
-                invokeModel.setMethodName(methodName);
-                invokeModel.setFileName(annotation.fileName());
-                String s = annotation.sheetName();
-                String[] sheetName = new String[]{s};
-                invokeModel.setSheetName(sheetName);
-                map.put(methodName, invokeModel);
+                map.put(excelTarget, invokeModel);
             }
         }
         return map;
+    }
+
+    /**
+     * 如果sheetName不设置，则选择用fileName作为sheetName
+     *
+     * @param fileName
+     * @param sheetName
+     * @return
+     */
+    private String getSheetName(String fileName, String sheetName) {
+        if (sheetName != null) {
+            if (NONE.equalsIgnoreCase(sheetName)) {
+                return fileName;
+            } else {
+                return sheetName;
+            }
+        }
+        return null;
+    }
+
+    private String getExcelTarget(String methodName, String value) {
+        if (NONE.equalsIgnoreCase(value)) {
+            return methodName;
+        }
+        return value;
     }
 }

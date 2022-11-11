@@ -78,9 +78,6 @@ public class AnnotationUtil {
         if (StringUtil.isEmpty(annotatedMethods)) {
             return resList;
         }
-        URI uri = reader.getResource().getURI();
-        System.out.println(uri);
-        System.out.println(annotationMetadata.getClassName());
         for (MethodMetadata next : annotatedMethods) {
             //根据类，保存各种内容
             String className = next.getDeclaringClassName();
