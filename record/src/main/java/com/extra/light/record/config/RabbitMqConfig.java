@@ -23,7 +23,7 @@ public class RabbitMqConfig {
      *
      * @return
      */
-    @Bean
+    //@Bean
     public Exchange exchangeTopicsInform() {
         return ExchangeBuilder.topicExchange(EXCHANGE_TOPICS_INFORM).durable(true).build();
     }
@@ -33,7 +33,7 @@ public class RabbitMqConfig {
      *
      * @return
      */
-    @Bean
+    //@Bean
     public Queue testQueue() {
         return new Queue(TEST_QUEUE);
     }
@@ -45,12 +45,12 @@ public class RabbitMqConfig {
      * @param testQueue
      * @return
      */
-    @Bean
+    //@Bean
     public Binding testBinding(Exchange exchangeTopicsInform, Queue testQueue) {
         return BindingBuilder.bind(testQueue).to(exchangeTopicsInform).with(ROUTING_TEST_KEY).noargs();
     }
 
-    @RabbitListener(queues = {TEST_QUEUE})
+    //@RabbitListener(queues = {TEST_QUEUE})
     public void receiveTest(Object msg, Message message, Channel channel){
         System.out.println("QUEUE_INFORM_SMS msg"+msg);
         System.out.println("QUEUE_INFORM_SMS msg"+message);

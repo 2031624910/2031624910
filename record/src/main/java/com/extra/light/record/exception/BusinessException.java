@@ -12,12 +12,12 @@ import lombok.Setter;
 public class BusinessException extends RuntimeException{
     @Getter
     @Setter
-    private String msg;
+    private String message;
     @Getter
     @Setter
     private int code;
     public BusinessException(String msg){
-        this.msg = msg;
+        this.message = msg;
         this.code = 500;
     }
 }

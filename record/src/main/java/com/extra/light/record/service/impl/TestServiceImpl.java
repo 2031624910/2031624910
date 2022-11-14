@@ -17,6 +17,11 @@ public class TestServiceImpl implements TestService {
 
     @Override
     public List<TestExcelModel> resultList(int page, int size, String params, HttpServletRequest request) {
-        return Collections.singletonList(TestExcelModel.builder().money(BigDecimal.ONE).time(7).wait("等待").build());
+        return Collections.singletonList(TestExcelModel.builder().money(BigDecimal.ONE).time(7).wait("等待" + params).build());
+    }
+
+    @Override
+    public List<TestExcelModel> resultList1(int page, int size, String params, HttpServletRequest request) {
+        return Collections.singletonList(TestExcelModel.builder().money(BigDecimal.TEN).time(9).wait("不等了" + params).build());
     }
 }

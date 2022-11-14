@@ -1,6 +1,9 @@
 package com.extra.light.record.model.bo;
 
+import com.alibaba.excel.support.ExcelTypeEnum;
+import com.extra.light.record.util.StringUtil;
 import lombok.Data;
+
 import java.util.List;
 
 /**
@@ -8,8 +11,14 @@ import java.util.List;
  */
 @Data
 public class ExportBo {
-    private String excelTarget;
-    private List<Object> objects;
+    private List<List<Object>> objects;
     private boolean test;
     private String suffix;
+
+    public String getSuffix() {
+        if (StringUtil.isEmpty(this.suffix)) {
+            this.suffix = ExcelTypeEnum.XLS.getValue();
+        }
+        return suffix;
+    }
 }

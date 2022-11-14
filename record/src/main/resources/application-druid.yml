@@ -15,9 +15,9 @@ spring:
         name: una_db3
         type: com.alibaba.druid.pool.DruidDataSource
         driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-  rabbitmq:
-    host: 192.168.3.140
-    port: 5672
-    username: admin
-    password: admin
-    virtualHost: /
+#  rabbitmq:
+#    host: 192.168.3.140
+#    port: 5672
+#    username: admin
+#    password: admin
+#    virtualHost: /

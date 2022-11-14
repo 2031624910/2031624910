@@ -34,12 +34,17 @@ public class ExcelController {
     private final Map<String, ExcelMethodInvokeModel> excelMethodInvokeMap;
 
     @ApiOperation("export")
-    @PostMapping("/export")
-    public ResponseEntity<?> export(@RequestBody ExportBo bo, HttpServletRequest request) {
+    @PostMapping("/export/{excelTarget}")
+    public ResponseEntity<?> export(@RequestBody ExportBo bo,
+                                    @PathVariable(value = "excelTarget") String excelTarget,
+                                    HttpServletRequest request) {
         String filePath = null;
-        ExcelMethodInvokeModel invokeModel = excelMethodInvokeMap.get(bo.getExcelTarget());
+        ExcelMethodInvokeModel invokeModel = excelMethodInvokeMap.get(excelTarget);
         if (StringUtil.isEmpty(invokeModel)) {
             return ResultConfig.failure("获取不到对应方法");
+        }
+        if (StringUtil.isEmpty(bo) || StringUtil.isEmpty(bo.getObjects())) {
+            return ResultConfig.failure("未找到参数");
         }
         String suffix = getSuffix(bo.getSuffix());
         boolean test = bo.isTest();
@@ -67,13 +72,15 @@ public class ExcelController {
                 } else {
                     excelWriter = EasyExcel.write(fileOutputStream).build();
                 }
+                //用于判断是否是已有名字
+                List<String> sheetNameList = new ArrayList<>();
                 for (ExcelMethodInvokeModel.Note note : noteList) {
                     try {
-                        noteWriter(note, excelWriter, i, bo.getObjects(), request);
+                        noteWriter(note, excelWriter, i, bo.getObjects().get(i), sheetNameList, request);
                         i++;
                     } catch (BusinessException e) {
-                        log.error("异常" + e.getMsg());
-                        return ResultConfig.failure("异常: " + e.getMsg());
+                        log.error("异常" + e.getMessage());
+                        return ResultConfig.failure("异常: " + e.getMessage());
                     }
                 }
                 //获取地址
@@ -81,7 +88,9 @@ public class ExcelController {
             } catch (Exception e) {
                 return ResultConfig.failure("创建异常" + e.getMessage());
             } finally {
-                excelWriter.close();
+                if (StringUtil.isNotEmpty(excelWriter)){
+                    excelWriter.close();
+                }
             }
         } catch (IOException e) {
             log.error("IO异常");
@@ -89,7 +98,11 @@ public class ExcelController {
         } finally {
             fileOutPutClose(fileOutputStream, test);
         }
-        return ResultConfig.success("导出成功", filePath);
+        if (test) {
+            return ResultConfig.success("导出成功", null);
+        } else {
+            return ResultConfig.success("导出成功", filePath);
+        }
     }
 
     /**
@@ -111,15 +124,20 @@ public class ExcelController {
     }
 
     /**
-     * 文件处理
+     * 单个方法调用，并写入文件
      *
      * @param note
      * @param excelWriter
      * @param i
      * @param objects
+     * @param sheetNameList
      * @param request
      */
-    private void noteWriter(ExcelMethodInvokeModel.Note note, ExcelWriter excelWriter, int i, List<Object> objects, HttpServletRequest request) {
+    private void noteWriter(ExcelMethodInvokeModel.Note note,
+                            ExcelWriter excelWriter,
+                            int i, List<Object> objects,
+                            List<String> sheetNameList,
+                            HttpServletRequest request) {
         Class<?> classType = note.getClassType();
         Object bean = null;
         try {
@@ -133,6 +151,7 @@ public class ExcelController {
             Class<?>[] args = note.getArgs();
             Method method = classType.getMethod(methodName, args);
             Class<?> returnType = method.getReturnType();
+            String sheetName = getSheetName(note.getSheetName(), sheetNameList, i);
             //判断类型
             if (!List.class.equals(returnType)) {
                 throw new BusinessException("返回类型非列表");
@@ -149,20 +168,58 @@ public class ExcelController {
             if (invoke instanceof List) {
                 //使用工具导出列表
                 System.out.println(invoke);
-                WriteSheet writeSheet = EasyExcel.writerSheet(i, note.getSheetName() + i).head(note.getResultType()).build();
+                WriteSheet writeSheet = EasyExcel.writerSheet(i, sheetName).head(note.getResultType()).build();
                 excelWriter.write((List) invoke, writeSheet);
             } else {
                 throw new BusinessException("返回类型非列表");
             }
         } catch (Exception e) {
-            throw new BusinessException("反射异常" + e.getMessage());
+            log.error("反射异常" + e.getMessage());
         }
     }
 
-    private String getSuffix(String suffix) {
-        return ExcelTypeEnum.XLS.getValue();
+    /**
+     * 获取sheetName，并保证不重复
+     *
+     * @param sheetName
+     * @param sheetNameList
+     * @param i
+     * @return
+     */
+    private String getSheetName(String sheetName, List<String> sheetNameList, int i) {
+        if (sheetNameList.contains(sheetName)) {
+            sheetName = sheetName + i;
+        }
+        sheetNameList.add(sheetName);
+        return sheetName;
     }
 
+    /**
+     * 校验后缀名
+     *
+     * @param suffix
+     * @return
+     */
+    private String getSuffix(String suffix) {
+        ExcelTypeEnum[] values = ExcelTypeEnum.values();
+        for (ExcelTypeEnum value : values) {
+            if (value.getValue().equalsIgnoreCase(suffix)) {
+                return value.getValue();
+            }
+        }
+        throw new BusinessException("后缀校验异常", 502);
+    }
+
+    /**
+     * 参数填充
+     *
+     * @param args    参数列表
+     * @param objects 参数值
+     * @param page    页码忽略位
+     * @param size    大小忽略位
+     * @param request 请求值
+     * @return 可以用于请求的参数列表
+     */
     private Object[] argsFill(Class<?>[] args, List<Object> objects, int page, int size, HttpServletRequest request) {
         int length = args.length;
         Object[] list = new Object[length];
@@ -187,6 +244,15 @@ public class ExcelController {
         return list;
     }
 
+    /**
+     * 参数校验
+     *
+     * @param args    参数列表
+     * @param objects 参数值列表
+     * @param page    页码忽略位
+     * @param size    大小忽略位
+     * @return 是否不通过校验
+     */
     private boolean argsVerify(Class<?>[] args, List<Object> objects, int page, int size) {
         //校验参数类型个数
         int length = args.length;
@@ -214,9 +280,6 @@ public class ExcelController {
             }
             j++;
         }
-        if (length - del != oSize) {
-            return true;
-        }
-        return false;
+        return length - del != oSize;
     }
 }
