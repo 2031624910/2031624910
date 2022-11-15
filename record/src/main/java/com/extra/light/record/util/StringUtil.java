@@ -391,4 +391,30 @@ public class StringUtil {
         }
         return findMatcher.start();
     }
+
+    /**
+     * 转化为小写
+     *
+     * @param c
+     * @return
+     */
+    public static char toLowerCaseChar(char c) {
+        if (c >= 'A' && c <= 'Z') {
+            return (char) (c + 32);
+        }
+        return c;
+    }
+
+    /**
+     * 转化为大写
+     *
+     * @param c
+     * @return
+     */
+    public static char toUpperCaseChar(char c) {
+        if (c >= 'a' && c <= 'z') {
+            return (char) (c - 32);
+        }
+        return c;
+    }
 }

@@ -8,6 +8,7 @@ import com.extra.light.record.config.ResultConfig;
 import com.extra.light.record.exception.BusinessException;
 import com.extra.light.record.model.ExcelMethodInvokeModel;
 import com.extra.light.record.model.bo.ExportBo;
+import com.extra.light.record.util.ClassUtil;
 import com.extra.light.record.util.FileUtil;
 import com.extra.light.record.util.SpringUtil;
 import com.extra.light.record.util.StringUtil;
@@ -88,7 +89,7 @@ public class ExcelController {
             } catch (Exception e) {
                 return ResultConfig.failure("创建异常" + e.getMessage());
             } finally {
-                if (StringUtil.isNotEmpty(excelWriter)){
+                if (StringUtil.isNotEmpty(excelWriter)) {
                     excelWriter.close();
                 }
             }
@@ -238,7 +239,13 @@ public class ExcelController {
                 list[i] = request;
                 continue;
             }
-            list[i] = objects.get(j);
+            Object o = objects.get(j);
+            if (o instanceof Map && ClassUtil.isNotList(arg) && ClassUtil.isNotBasicType(arg)) {
+                Object bean = ClassUtil.mapToClass(arg, ClassUtil.getStringMap((Map) o));
+                list[i] = bean;
+            } else {
+                list[i] = o;
+            }
             j++;
         }
         return list;
@@ -275,7 +282,12 @@ public class ExcelController {
                 continue;
             }
             Object o = objects.get(j);
-            if (!o.getClass().equals(arg)) {
+            //如果arg不是基础和List类型，o是map类型，则返回continue
+            if (ClassUtil.isNotBasicType(arg) && ClassUtil.isNotList(arg) && o instanceof Map) {
+                continue;
+            }
+            //去掉是自定义对象的，其他必须是他的子类的或者需要忽略的，其他需要是子类或者本类，才可以成功
+            if (!o.getClass().equals(arg) || !arg.isAssignableFrom(o.getClass())) {
                 return true;
             }
             j++;

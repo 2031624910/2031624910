@@ -1,22 +1,27 @@
 package com.extra.light.record.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.extra.light.record.annotation.ExcelMethod;
 import com.extra.light.record.config.RabbitMqConfig;
 import com.extra.light.record.dao.mapper.TestMapper;
 import com.extra.light.record.model.AnnotationModel;
+import com.extra.light.record.model.bo.TestArgsBo;
 import com.extra.light.record.service.TestService;
 import com.extra.light.record.util.AnnotationUtil;
+import com.extra.light.record.util.ClassUtil;
 import com.extra.light.record.util.SpringUtil;
 import com.extra.light.record.util.StringUtil;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 林树毅
@@ -77,6 +82,25 @@ public class TestController {
         //使用rabbitTemplate发送消息
         String message = "send email message to user";
         rabbitTemplate.convertAndSend(RabbitMqConfig.TEST_QUEUE, message);
+        return "";
+    }
+
+    @ApiOperation("测试参数")
+    @PostMapping("testArgs")
+    public String testArgs(@RequestBody TestArgsBo argsBo) {
+        try {
+            //用来增加参数的
+            System.out.println(argsBo);
+            List<Object> args = argsBo.getArgs();
+            Class<TestController> aClass = TestController.class;
+            System.out.println(args.get(0));
+            Object o = args.get(0);
+            Map<String, Object> map = (Map) o;
+            System.out.println(map);
+            return "success";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "";
     }
 
