@@ -94,5 +94,15 @@
       "name": "excel.export.classPath",
       "type": "java.lang.String",
       "description": "Description for excel.export.classPath."
+    },
+    {
+      "name": "nacos.server-addr",
+      "type": "java.lang.String",
+      "description": "Description for nacos.server-addr."
+    },
+    {
+      "name": "nacos.namespace",
+      "type": "java.lang.String",
+      "description": "Description for nacos.namespace."
     }
   ] }

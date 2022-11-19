@@ -131,6 +131,17 @@
                 <artifactId>fastjson</artifactId>
                 <version>1.2.79</version>
             </dependency>
+            <!--nacos注册中心-->
+            <dependency>
+                <groupId>com.alibaba.boot</groupId>
+                <artifactId>nacos-config-spring-boot-starter</artifactId>
+                <version>0.2.7</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-nacos-config</artifactId>
+                <version>2.2.0.RELEASE</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>
