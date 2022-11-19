@@ -89,5 +89,10 @@
       "name": "spring.datasource.druid.writer.driver-class-name",
       "type": "java.lang.String",
       "description": "Description for spring.datasource.druid.writer.driver-class-name."
+    },
+    {
+      "name": "excel.export.classPath",
+      "type": "java.lang.String",
+      "description": "Description for excel.export.classPath."
     }
   ] }
