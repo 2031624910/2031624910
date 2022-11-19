@@ -13,9 +13,9 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
+        <module>common</module>
         <module>record</module>
         <module>identity</module>
-        <module>common</module>
     </modules>
 
     <dependencyManagement>
@@ -29,6 +29,11 @@
             <dependency>
                 <groupId>com.extra.light</groupId>
                 <artifactId>identity</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.extra.light</groupId>
+                <artifactId>common</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <!--添加starter-web模块的依赖-->

@@ -1,0 +1,98 @@
+{
+  "properties": [
+    {
+      "name": "spring.datasource.druid.h2.password",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.druid.h2.password."
+    },
+    {
+      "name": "spring.datasource.druid.h2.username",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.druid.h2.username."
+    },
+    {
+      "name": "spring.datasource.druid.h2.url",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.druid.h2.url."
+    },
+    {
+      "name": "spring.datasource.druid.h2.name",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.druid.h2.name."
+    },
+    {
+      "name": "spring.datasource.druid.h2.type",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.druid.h2.type."
+    },
+    {
+      "name": "spring.datasource.druid.h2.driver-class-name",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.druid.h2.driver-class-name."
+    },
+    {
+      "name": "spring.datasource.druid.reader.url",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.druid.reader.url."
+    },
+    {
+      "name": "spring.datasource.druid.reader.username",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.druid.reader.username."
+    },
+    {
+      "name": "spring.datasource.druid.reader.password",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.druid.reader.password."
+    },
+    {
+      "name": "spring.datasource.druid.reader.name",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.druid.reader.name."
+    },
+    {
+      "name": "spring.datasource.druid.reader.type",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.druid.reader.type."
+    },
+    {
+      "name": "spring.datasource.druid.reader.driver-class-name",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.druid.reader.driver-class-name."
+    },
+    {
+      "name": "spring.datasource.druid.writer.url",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.druid.writer.url."
+    },
+    {
+      "name": "spring.datasource.druid.writer.username",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.druid.writer.username."
+    },
+    {
+      "name": "spring.datasource.druid.writer.password",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.druid.writer.password."
+    },
+    {
+      "name": "spring.datasource.druid.writer.name",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.druid.writer.name."
+    },
+    {
+      "name": "spring.datasource.druid.writer.type",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.druid.writer.type."
+    },
+    {
+      "name": "spring.datasource.druid.writer.driver-class-name",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.druid.writer.driver-class-name."
+    },
+    {
+      "name": "excel.export.classPath",
+      "type": "java.lang.String",
+      "description": "Description for excel.export.classPath."
+    }
+  ] }
