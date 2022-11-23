@@ -104,5 +104,10 @@
       "name": "nacos.namespace",
       "type": "java.lang.String",
       "description": "Description for nacos.namespace."
+    },
+    {
+      "name": "spring.application",
+      "type": "java.lang.String",
+      "description": "Description for spring.application."
     }
   ] }

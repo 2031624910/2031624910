@@ -20,6 +20,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @ComponentScan(basePackages = {"com.extra.light.common", "com.extra.light.record"})
 public class RecordApplication {
     public static void main(String[] args) {
+        System.setProperty("serverName", "record");
         SpringApplication.run(RecordApplication.class, args);
     }
 }
