@@ -68,6 +68,3 @@ logging:
 excel:
   export:
     classPath: ""
-nacos:
-  server-addr: 192.168.3.140:8848
-  namespace: light

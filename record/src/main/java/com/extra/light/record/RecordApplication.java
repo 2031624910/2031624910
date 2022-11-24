@@ -1,5 +1,6 @@
 package com.extra.light.record;
 
+import com.extra.light.common.config.SystemPropertyConfig;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,7 +21,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @ComponentScan(basePackages = {"com.extra.light.common", "com.extra.light.record"})
 public class RecordApplication {
     public static void main(String[] args) {
-        System.setProperty("serverName", "record");
+        SystemPropertyConfig.setSystemPropertyConfig("record", "record");
         SpringApplication.run(RecordApplication.class, args);
     }
 }
