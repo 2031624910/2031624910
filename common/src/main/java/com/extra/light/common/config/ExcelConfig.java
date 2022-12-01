@@ -26,6 +26,12 @@ public class ExcelConfig {
 
 
     @Bean
+    public List<Class<? extends Enum<?>>> enumsList(){
+        return new ArrayList<>();
+    }
+
+
+    @Bean
     public Map<String, ExcelMethodInvokeModel> excelMethodInvokeMap(AnnotationUtil annotationUtil) {
         Map<String, ExcelMethodInvokeModel> map = new HashMap<>();
         if (StringUtil.isNotEmpty(classPath)) {

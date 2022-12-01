@@ -1,5 +1,6 @@
 package com.extra.light.identity.controller;
 
+import com.extra.light.common.util.SpringUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +24,8 @@ public class IdentityController {
     @GetMapping("test")
     @ApiOperation("测试")
     public String test(@RequestParam("dataId") String dataId) {
-        return "";
+        Object enumsList = SpringUtil.getBean("enumsList");
+        return String.valueOf(enumsList);
     }
 
 }

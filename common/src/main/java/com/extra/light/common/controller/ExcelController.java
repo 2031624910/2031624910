@@ -12,6 +12,7 @@ import com.extra.light.common.util.ClassUtil;
 import com.extra.light.common.util.FileUtil;
 import com.extra.light.common.util.SpringUtil;
 import com.extra.light.common.util.StringUtil;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +33,7 @@ import java.io.*;
 @RestController
 @Slf4j
 @RequestMapping("excel")
+@Api(tags = "通用导出接口")
 public class ExcelController {
     private final FileUtil fileUtil;
     private final Map<String, ExcelMethodInvokeModel> excelMethodInvokeMap;

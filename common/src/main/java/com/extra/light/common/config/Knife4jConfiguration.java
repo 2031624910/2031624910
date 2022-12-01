@@ -33,7 +33,8 @@ public class Knife4jConfiguration {
                 .groupName("用户服务")
                 .select()
                 //这里指定Controller扫描包路径
-                .apis(RequestHandlerSelectors.basePackage("com.extra.light." + serverName + ".controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.extra.light." + serverName + ".controller")
+                        .or(RequestHandlerSelectors.basePackage("com.extra.light.common.controller")))
                 .paths(PathSelectors.any())
                 .build();
     }
