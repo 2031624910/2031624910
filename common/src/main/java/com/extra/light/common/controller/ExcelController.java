@@ -7,6 +7,7 @@ import com.alibaba.excel.write.metadata.WriteSheet;
 import com.extra.light.common.config.ResultConfig;
 import com.extra.light.common.exception.BusinessException;
 import com.extra.light.common.model.ExcelMethodInvokeModel;
+import com.extra.light.common.model.UserInfoModel;
 import com.extra.light.common.model.bo.ExportBo;
 import com.extra.light.common.util.ClassUtil;
 import com.extra.light.common.util.FileUtil;
@@ -243,6 +244,10 @@ public class ExcelController {
                 list[i] = request;
                 continue;
             }
+            if (arg.equals(UserInfoModel.class)) {
+                list[i] = null;
+                continue;
+            }
             Object o = objects.get(j);
             if (o instanceof Map && ClassUtil.isNotList(arg) && ClassUtil.isNotBasicType(arg)) {
                 Object bean = ClassUtil.mapToClass(arg, ClassUtil.getStringMap((Map) o));
@@ -282,6 +287,10 @@ public class ExcelController {
             }
             Class<?> arg = args[i];
             if (arg.equals(HttpServletRequest.class)) {
+                del++;
+                continue;
+            }
+            if (arg.equals(UserInfoModel.class)) {
                 del++;
                 continue;
             }

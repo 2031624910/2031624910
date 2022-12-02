@@ -1,5 +1,7 @@
 package com.extra.light.common.annotation;
 
+import com.extra.light.common.model.UserInfoModel;
+
 import javax.servlet.http.HttpServletRequest;
 import java.lang.annotation.*;
 
@@ -48,7 +50,7 @@ public @interface ExcelMethod {
      *
      * @return
      */
-    Class[] args() default {int.class, int.class, String.class, HttpServletRequest.class};
+    Class[] args() default {int.class, int.class, UserInfoModel.class};
 
     /**
      * page 的位置

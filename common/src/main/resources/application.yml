@@ -65,6 +65,3 @@ logging:
   config: classpath:logback-spring.xml
   file:
     path: appdate/logs/
-excel:
-  export:
-    classPath: ""

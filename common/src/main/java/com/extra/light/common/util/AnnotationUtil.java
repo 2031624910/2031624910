@@ -42,7 +42,7 @@ public class AnnotationUtil {
             ResourcePatternResolver resolver = ResourcePatternUtils.getResourcePatternResolver(resourceLoader);
             MetadataReaderFactory metaReader = new CachingMetadataReaderFactory(resourceLoader);
             Resource[] resources = resolver.getResources(classPath);
-            for (org.springframework.core.io.Resource r : resources) {
+            for (Resource r : resources) {
                 try {
                     MetadataReader reader = metaReader.getMetadataReader(r);
                     resList = resolveClass(reader, resList, tagAnnotationClass);

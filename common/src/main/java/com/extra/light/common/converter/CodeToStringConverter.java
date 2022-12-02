@@ -21,7 +21,7 @@ import java.lang.reflect.Field;
 public class CodeToStringConverter implements Converter<Object> {
     @Override
     public Class<?> supportJavaTypeKey() {
-        return String.class;
+        return null;
     }
 
     @Override
@@ -37,7 +37,7 @@ public class CodeToStringConverter implements Converter<Object> {
             //获取枚举类
             try {
                 ExcelEnum annotation = field.getAnnotation(ExcelEnum.class);
-                Class<? extends TypeEnum<?, ?>> enums = annotation.enums();
+                Class<?> enums = annotation.enums();
                 if (!annotation.isReversal()) {
                     return EnumsUtil.getValueByCode(enums, cellData.getData());
                 } else {
@@ -47,7 +47,7 @@ public class CodeToStringConverter implements Converter<Object> {
                 log.error("excel表解析异常 >> " + e.getMessage());
             }
         }
-        return cellData.getData();
+        return cellData.getStringValue();
     }
 
     @Override
@@ -60,14 +60,15 @@ public class CodeToStringConverter implements Converter<Object> {
             //获取枚举类
             try {
                 ExcelEnum annotation = field.getAnnotation(ExcelEnum.class);
-                Class<? extends TypeEnum<?, ?>> enums = annotation.enums();
+                Class<?> enums = annotation.enums();
                 Object o = null;
                 if (annotation.isReversal()) {
-                    o = EnumsUtil.getValueByCode(enums, value);
-                } else {
                     o = EnumsUtil.getCodeByValue(enums, value);
+                } else {
+                    o = EnumsUtil.getValueByCode(enums, value);
                 }
-                stringCellData.setData(String.valueOf(o));
+                stringCellData.setStringValue(String.valueOf(o));
+                stringCellData.setType(CellDataTypeEnum.STRING);
             } catch (Exception e) {
                 log.error("excel表解析异常 >> " + e.getMessage());
             }

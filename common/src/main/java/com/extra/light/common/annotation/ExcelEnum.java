@@ -17,7 +17,7 @@ public @interface ExcelEnum {
      *
      * @return
      */
-    Class<? extends TypeEnum<?, ?>> enums();
+    Class<?> enums();
 
     /**
      * 是否反过来查询, 默认正序，通过code获取value接口
